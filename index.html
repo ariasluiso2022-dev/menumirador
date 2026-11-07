@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f172a">
+    <title>Menú Comida Rápida | Mirador de Cristal J.F-D.A</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script> 
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        skybrand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            dark: '#0f172a',
+                            card: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 4px;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Mobile touch enhancements */
+        button, a, input {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-white">
+
+    <!-- HEADER / BANNER -->
+    <header class="relative bg-gradient-to-r from-slate-950 via-slate-900 to-sky-950 border-b border-slate-800 sticky top-0 z-30 shadow-xl backdrop-blur-md bg-opacity-95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+            <div class="flex items-center justify-between gap-4">
+                
+                <!-- Logo & Title -->
+                <a href="https://www.instagram.com/miradordecristal2026?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 group transition duration-200">
+                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-sky-600 to-sky-400 flex items-center justify-center shadow-lg shadow-sky-500/20 text-white font-bold text-xl sm:text-2xl group-hover:scale-105 transition-transform">
+                        <i class="fa-solid font-bold fa-utensils"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-base sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-sky-300 bg-clip-text text-transparent">
+                            Mirador de Cristal J.F-D.A 
+                        </h1>
+                        <p class="text-[11px] sm:text-xs text-sky-400/80 font-medium flex items-center gap-1.5">
+                            Comida Rápida & Especialidades 
+                            <span class="text-slate-400 font-normal hidden sm:inline">• @miradordecristal</span>
+                        </p>
+                    </div>
+                </a>
+
+                <!-- External Web Link Button & Rate Ticker -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Instagram Link Header -->
+                    <a href="https://www.instagram.com/miradordecristal2026?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="hidden lg:flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700/80 text-sky-300 border border-sky-500/30 rounded-xl px-3.5 py-2 text-xs font-semibold transition shadow-sm">
+                        <i class="fa-solid fa-globe text-sky-400"></i>
+                        <span>@miradordecristal</span>
+                    </a>
+
+                    <!-- Rate Ticker Desktop -->
+                    <div class="hidden md:flex items-center gap-2 bg-slate-800/60 border border-slate-700/50 rounded-xl px-3.5 py-2 text-xs">
+                        <div class="flex items-center gap-2 text-slate-300">
+                            <span id="bcv-status-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" title="Tasa BCV sincronizada"></span>
+                            <span id="rate-label">Tasa BCV ($):</span>
+                            <input id="exchange-rate-input" type="number" value="890.00" step="0.01" class="w-20 bg-slate-900 border border-slate-700 rounded text-center text-sky-400 font-bold focus:outline-none focus:border-sky-500 py-0.5 text-xs">
+                        </div>
+                    </div>
+
+                    <!-- Desktop Cart Button -->
+                    <button onclick="toggleCart()" class="hidden sm:flex items-center space-x-2.5 bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-semibold px-4 py-2 rounded-xl shadow-lg shadow-sky-600/25 transition duration-200">
+                        <div class="relative">
+                            <i class="fa-solid fa-cart-shopping text-base"></i>
+                            <span id="cart-badge-desktop" class="absolute -top-2 -right-3 bg-slate-950 text-sky-300 text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border border-sky-400/50">0</span>
+                        </div>
+                        <span>Mi Pedido</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search & Filters Bar -->
+            <div class="mt-3.5 flex flex-col sm:flex-row gap-2.5 items-center justify-between">
+                
+                <!-- Search Input -->
+                <div class="relative w-full sm:w-72">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="search-input" placeholder="Buscar platillo o ingrediente..." 
+                           class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-10 pr-4 py-2 text-xs sm:text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-sky-500 transition">
+                </div>
+
+                <!-- Categories Horizontal Scroll -->
+                <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 hide-scrollbar" id="categories-container">
+                    <!-- Dynamic categories injected by JS -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+        
+        <!-- Mobile Rate & Instagram Banner -->
+        <div class="md:hidden mb-5 space-y-2">
+            <a href="https://www.instagram.com/miradordecristal2026?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-slate-900/90 border border-sky-500/30 rounded-xl p-3 text-xs text-sky-300 font-medium">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-globe text-sky-400"></i>
+                    <span>Instagram Oficial</span>
+                </span>
+                <span class="font-bold underline">@miradordecristal</span>
+            </a>
+
+            <!-- Rate Input Mobile -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex items-center justify-between text-xs text-slate-300 shadow-sm">
+                <span class="flex items-center gap-2">
+                    <span id="bcv-status-dot-mobile" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="rate-label-mobile">Tasa BCV ($1 =):</span>
+                </span>
+                <div class="flex items-center gap-1">
+                    <span class="text-sky-400 font-bold text-xs">Bs.</span>
+                    <input id="exchange-rate-input-mobile" type="number" value="890.00" step="0.01" class="w-24 bg-slate-800 border border-slate-700 rounded text-center text-sky-400 font-bold focus:outline-none focus:border-sky-500 py-1 text-sm">
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Title & Counter -->
+        <div class="flex items-center justify-between mb-5">
+            <h2 id="section-title" class="text-lg sm:text-2xl font-bold text-slate-100 flex items-center gap-2">
+                <i class="fa-solid fa-utensils text-sky-400"></i> Todos los Platillos
+            </h2>
+            <span id="items-count" class="text-xs font-medium bg-slate-900 text-slate-400 px-3 py-1 rounded-full border border-slate-800">
+                11 platillos
+            </span>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <!-- Cards generated dynamically -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden flex-col items-center justify-center py-16 text-center">
+            <div class="w-16 h-16 bg-slate-900 text-slate-500 rounded-full flex items-center justify-center text-2xl mb-3 border border-slate-800">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-200 mb-1">No se encontraron productos</h3>
+            <p class="text-slate-400 text-xs max-w-xs">Prueba buscando con otro término o categoría.</p>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 border-t border-slate-800/80 py-5 text-center text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>© 2026 Mirador de Cristal J.F-D.A. Todos los derechos reservados.</p>
+            
+            <a href="https://www.instagram.com/miradordecristal2026?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sky-300 hover:text-sky-200 font-semibold bg-sky-500/10 border border-sky-500/20 px-3 py-1.5 rounded-lg transition">
+                <i class="fa-solid fa-globe"></i>
+                <span>@miradordecristal</span>
+            </a>
+
+            <p class="flex items-center gap-1 text-slate-400">
+                <i class="fa-solid fa-clock text-sky-400"></i> 8:00 AM - 9:00 PM
+            </p>
+        </div>
+    </footer>
+
+    <!-- FLOATING CART BUTTON (MOBILE) -->
+    <div class="fixed bottom-5 right-5 z-40 sm:hidden">
+        <button onclick="toggleCart()" class="relative bg-gradient-to-r from-sky-600 to-cyan-500 text-white p-3.5 rounded-full shadow-2xl shadow-sky-600/50 flex items-center justify-center focus:outline-none active:scale-95 transition">
+            <i class="fa-solid fa-cart-shopping text-lg"></i>
+            <span id="cart-badge-mobile" class="absolute -top-1 -right-1 bg-slate-950 text-sky-300 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-sky-400">0</span>
+        </button>
+    </div>
+
+    <!-- CART SIDEBAR / DRAWER -->
+    <div id="cart-drawer-overlay" onclick="toggleCart()" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+    <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-slate-900 border-l border-slate-800 z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between shadow-2xl">
+        
+        <!-- Cart Header -->
+        <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-100 text-sm">Tu Pedido</h3>
+                    <p class="text-[11px] text-slate-400" id="cart-subtitle">0 artículos</p>
+                </div>
+            </div>
+            <button onclick="toggleCart()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-3">
+            <!-- Dynamic Cart Items -->
+        </div>
+
+        <!-- Cart Footer / Summary -->
+        <div class="p-4 border-t border-slate-800 bg-slate-950/80 space-y-3">
+            
+            <!-- Notes / Delivery -->
+            <div>
+                <label class="block text-[11px] font-medium text-slate-400 mb-1">Nombre, Apellido y Dirección / Mesa:</label>
+                <textarea id="order-notes" rows="2" placeholder="Ej: Carlos Pérez, Mesa 3..." 
+                          class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 resize-none"></textarea>
+            </div>
+
+            <!-- Totals Breakdown -->
+            <div class="space-y-1 pt-2 border-t border-slate-800 text-xs">
+                <div class="flex justify-between text-slate-400">
+                    <span>Subtotal ($):</span>
+                    <span id="cart-subtotal-usd" class="font-medium text-slate-200">$0.00</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Equivalente en Bs (Tasa BCV):</span>
+                    <span id="cart-subtotal-bs" class="font-semibold text-sky-300">Bs. 0.00</span>
+                </div>
+                <div class="flex justify-between text-slate-100 text-sm font-bold pt-1.5 border-t border-slate-800">
+                    <span>Total USD:</span>
+                    <span id="cart-total-usd" class="text-sky-400 text-base">$0.00</span>
+                </div>
+            </div>
+
+            <!-- WhatsApp Checkout Button -->
+            <button onclick="sendOrderToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-emerald-600/20 flex items-center justify-center space-x-2 transition active:scale-[0.98] text-xs sm:text-sm">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Enviar Pedido por WhatsApp</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-20 sm:bottom-6 left-1/2 -translate-x-1/2 bg-slate-800 text-slate-100 px-4 py-2 rounded-xl border border-slate-700 shadow-2xl flex items-center space-x-2.5 pointer-events-none opacity-0 transition-all duration-300 z-50 text-xs">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-500 text-base"></i>
+        <span id="toast-msg" class="font-medium">Producto añadido</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. DATA DEFINITIONS ---
+        const PRODUCTS = [
+            { id: 1, name: "Pollo a la broster", price: 7.0, category: "Comidas Rápidas", icon: "fa-drumstick-bite", desc: "Crujiente pollo frito sazonado con especias secretas de la casa.", popular: true },
+            { id: 3, name: "Sopa de Res", price: 7.0, category: "Sopas y Platos Fuertes", icon: "fa-bowl-rice", desc: "Sustancioso sancocho de res cocinado a fuego lento con tubérculos.", popular: false },
+            { id: 6, name: "Pinchos", price: 15.0, category: "Sopas y Platos Fuertes", icon: "fa-fire-burner", desc: "Brochetas de carne mixta a la parrilla acompañadas de hallaquitas o yuca.", popular: true },
+            { id: 7, name: "Churrasco", price: 15.0, category: "Sopas y Platos Fuertes", icon: "fa-drumstick-bite", desc: "Corte de carne tierna a la plancha bañado en chimichurri de la casa.", popular: false },
+            { id: 8, name: "Ración de Salchipapas", price: 5.0, category: "Comidas Rápidas", icon: "fa-box", desc: "Papas fritas crujientes con salchichas salteadas y salsas especiales.", popular: false },
+            { id: 9, name: "Perro Caliente", price: 1.5, category: "Comidas Rápidas", icon: "fa-hotdog", desc: "Clásico perro con salchicha premium, cebollita, papitas y trío de salsas.", popular: true },
+            { id: 10, name: "Hamburguesa", price: 4.5, category: "Comidas Rápidas", icon: "fa-burger", desc: "Carne jugosa, queso derretido, lechuga, tomate y papitas hilo.", popular: true },
+            { id: 11, name: "Teque yoyo", price: 1.7, category: "Entradas y Contornos", icon: "fa-cheese", desc: "Plátano maduro frito relleno de queso fundido y empanizado.", popular: false },
+            { id: 12, name: "Tequeño con Queso", price: 1.5, category: "Entradas y Contornos", icon: "fa-cookie", desc: "Dedito de masa suave y crujiente relleno de abundante queso blanco.", popular: true },
+            { id: 13, name: "Chupeta de Pollo", price: 5.5, category: "Entradas y Contornos", icon: "fa-drumstick-bite", desc: "Jugosas alas de pollo empanizadas ideales para picar.", popular: false },
+            { id: 14, name: "Desayunos", price: 5.5, category: "Desayunos", icon: "fa-egg", desc: "Plato surtido con arepa, huevos revueltos, queso fresco y caraotas.", popular: false }
+        ];
+
+        const CATEGORIES = ["Todos", "Comidas Rápidas", "Sopas y Platos Fuertes", "Entradas y Contornos", "Desayunos"];
+
+        // --- 2. STATE ---
+        let cart = [];
+        let selectedCategory = "Todos";
+        let searchQuery = "";
+        let exchangeRate = 890.00; // Valor por defecto inicial
+
+        // --- 3. INITIALIZATION ---
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCategories();
+            renderProducts();
+            setupEventListeners();
+            fetchBCVRate(); // Carga automática de la tasa BCV al iniciar
+        });
+
+        // --- FETCH BCV RATE AUTOMATICALLY ---
+        async function fetchBCVRate() {
+            try {
+                const response = await fetch("https://bcv.today/api/v1/rate.json", { cache: "no-cache" });
+                if (!response.ok) throw new Error("Error al conectar con la API BCV");
+                const data = await response.json();
+                
+                if (data && data.USD) {
+                    exchangeRate = parseFloat(data.USD);
+                    
+                    // Actualizar inputs en la interfaz
+                    document.getElementById("exchange-rate-input").value = exchangeRate.toFixed(2);
+                    document.getElementById("exchange-rate-input-mobile").value = exchangeRate.toFixed(2);
+                    
+                    // Actualizar estado visual (indicador verde)
+                    document.getElementById("bcv-status-dot").classList.replace("bg-amber-500", "bg-emerald-500");
+                    document.getElementById("bcv-status-dot-mobile").classList.replace("bg-amber-500", "bg-emerald-500");
+                    document.getElementById("rate-label").textContent = `Tasa BCV (${data.date || 'Hoy'}):`;
+                    
+                    renderProducts();
+                    updateCartUI();
+                }
+            } catch (error) {
+                console.warn("No se pudo obtener la tasa BCV en línea automáticamente. Se mantiene la tasa manual.", error);
+                // Indicar estado amarillo si usa respaldo local
+                document.getElementById("bcv-status-dot").classList.replace("bg-emerald-500", "bg-amber-500");
+                document.getElementById("bcv-status-dot-mobile").classList.replace("bg-emerald-500", "bg-amber-500");
+            }
+        }
+
+        // --- 4. RENDER CATEGORIES ---
+        function renderCategories() {
+            const container = document.getElementById("categories-container");
+            container.innerHTML = CATEGORIES.map(cat => `
+                <button onclick="selectCategory('${cat}')" 
+                        class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-200 border ${
+                            selectedCategory === cat 
+                            ? 'bg-gradient-to-r from-sky-600 to-cyan-500 text-white border-transparent shadow-md shadow-sky-600/30' 
+                            : 'bg-slate-900 text-slate-400 border-slate-800 hover:bg-slate-800 hover:text-slate-200'
+                        }">
+                    ${cat}
+                </button>
+            `).join("");
+        }
+
+        // --- 5. RENDER PRODUCTS GRID ---
+        function renderProducts() {
+            const grid = document.getElementById("products-grid");
+            const emptyState = document.getElementById("empty-state");
+            const countLabel = document.getElementById("items-count");
+            const sectionTitle = document.getElementById("section-title");
+
+            const filtered = PRODUCTS.filter(p => {
+                const matchesCategory = selectedCategory === "Todos" || p.category === selectedCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      p.desc.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            countLabel.textContent = `${filtered.length} platillos`;
+            sectionTitle.innerHTML = `<i class="fa-solid ${selectedCategory === 'Todos' ? 'fa-utensils' : 'fa-list'} text-sky-400"></i> ${selectedCategory}`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                emptyState.classList.add("flex");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+            emptyState.classList.remove("flex");
+
+            grid.innerHTML = filtered.map(p => {
+                const bsPrice = (p.price * exchangeRate).toFixed(2);
+                return `
+                <div class="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-500/10 group relative overflow-hidden">
+                    
+                    ${p.popular ? `
+                        <div class="absolute top-0 right-0 bg-gradient-to-l from-sky-500 to-cyan-400 text-slate-950 font-extrabold text-[10px] uppercase tracking-wider px-3 py-1 rounded-bl-xl shadow-md">
+                            <i class="fa-solid fa-fire mr-1"></i> Popular
+                        </div>
+                    ` : ''}
+
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700/60 text-sky-400 flex items-center justify-center text-lg group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
+                                <i class="fa-solid ${p.icon}"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-semibold text-sky-400/90 uppercase tracking-wider block">${p.category}</span>
+                                <h3 class="font-bold text-slate-100 text-sm group-hover:text-sky-300 transition">${p.name}</h3>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4 line-clamp-2">
+                            ${p.desc}
+                        </p>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-extrabold text-slate-100">$${p.price.toFixed(2)}</span>
+                            <span class="block text-[11px] text-slate-400 font-medium">~ Bs. ${bsPrice}</span>
+                        </div>
+
+                        <button onclick="addToCart(${p.id})" class="bg-slate-800 hover:bg-sky-600 text-slate-200 hover:text-white px-3 py-2 rounded-xl font-semibold text-xs flex items-center space-x-1.5 border border-slate-700 hover:border-sky-500 transition active:scale-95 shadow-md">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Añadir</span>
+                        </button>
+                    </div>
+                </div>
+            `}).join("");
+        }
+
+        // --- 6. CART MANAGEMENT ---
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Añadido: ${product.name}`);
+        }
+
+        function updateQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById("cart-items-container");
+            const badgeDesktop = document.getElementById("cart-badge-desktop");
+            const badgeMobile = document.getElementById("cart-badge-mobile");
+            const cartSubtitle = document.getElementById("cart-subtitle");
+            const subtotalUsd = document.getElementById("cart-subtotal-usd");
+            const subtotalBs = document.getElementById("cart-subtotal-bs");
+            const totalUsd = document.getElementById("cart-total-usd");
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalUSD = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const totalBS = (totalUSD * exchangeRate).toFixed(2);
+
+            badgeDesktop.textContent = totalItems;
+            badgeMobile.textContent = totalItems;
+            cartSubtitle.textContent = `${totalItems} ${totalItems === 1 ? 'artículo seleccionado' : 'artículos seleccionados'}`;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center p-6">
+                        <div class="w-14 h-14 rounded-full bg-slate-800 text-slate-600 flex items-center justify-center text-xl mb-3">
+                            <i class="fa-solid fa-cart-flatbed"></i>
+                        </div>
+                        <p class="text-slate-300 font-medium text-xs">Tu carrito está vacío</p>
+                        <p class="text-slate-500 text-[11px] mt-1">Selecciona algunos platillos del menú.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 flex items-center justify-between gap-3">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-slate-200 text-xs truncate">${item.name}</h4>
+                            <div class="text-[11px] text-sky-300 font-semibold mt-0.5">
+                                $${(item.price * item.quantity).toFixed(2)} 
+                                <span class="text-slate-500 font-normal">($${item.price.toFixed(2)} c/u)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-2 bg-slate-900 border border-slate-700 rounded-lg p-1">
+                            <button onclick="updateQuantity(${item.id}, -1)" class="w-6 h-6 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 flex items-center justify-center text-xs font-bold transition">
+                                <i class="fa-solid ${item.quantity === 1 ? 'fa-trash-can text-red-400' : 'fa-minus'}"></i>
+                            </button>
+                            <span class="text-xs font-bold text-slate-100 w-4 text-center">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="w-6 h-6 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 flex items-center justify-center text-xs font-bold transition">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join("");
+            }
+
+            subtotalUsd.textContent = `$${totalUSD.toFixed(2)}`;
+            subtotalBs.textContent = `Bs. ${totalBS}`;
+            totalUsd.textContent = `$${totalUSD.toFixed(2)}`;
+        }
+
+        // --- 7. UI TOGGLES & INTERACTION ---
+        function selectCategory(category) {
+            selectedCategory = category;
+            renderCategories();
+            renderProducts();
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById("cart-drawer");
+            const overlay = document.getElementById("cart-drawer-overlay");
+            const isOpen = !drawer.classList.contains("translate-x-full");
+
+            if (isOpen) {
+                drawer.classList.add("translate-x-full");
+                overlay.classList.add("opacity-0", "pointer-events-none");
+                overlay.classList.remove("opacity-100");
+            } else {
+                drawer.classList.remove("translate-x-full");
+                overlay.classList.remove("opacity-0", "pointer-events-none");
+                overlay.classList.add("opacity-100");
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            const toastMsg = document.getElementById("toast-msg");
+
+            toastMsg.textContent = message;
+            toast.classList.remove("opacity-0", "translate-y-2");
+            toast.classList.add("opacity-100", "translate-y-0");
+
+            setTimeout(() => {
+                toast.classList.add("opacity-0", "translate-y-2");
+                toast.classList.remove("opacity-100", "translate-y-0");
+            }, 2000);
+        }
+
+        // --- 8. WHATSAPP CHECKOUT ---
+        function sendOrderToWhatsApp() {
+            if (cart.length === 0) {
+                showToast("El carrito está vacío");
+                return;
+            }
+
+            const notes = document.getElementById("order-notes").value.trim();
+            const totalUSD = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const totalBS = (totalUSD * exchangeRate).toFixed(2);
+
+            let message = `*¡Hola! Quisiera realizar el siguiente pedido en Mirador de Cristal J.F-D.A:* \n\n`;
+            
+            cart.forEach(item => {
+                const sub = (item.price * item.quantity).toFixed(2);
+                message += `• *${item.quantity}x* ${item.name} - $${sub}\n`;
+            });
+
+            message += `\n*TOTAL USD:* $${totalUSD.toFixed(2)}`;
+            message += `\n*TOTAL BS (Tasa BCV ~${exchangeRate}):* Bs. ${totalBS}`;
+
+            if (notes) {
+                message += `\n\n*Datos / Dirección:* ${notes}`;
+            }
+
+            message += `\n\n_¡Quedo atento a su confirmación!_`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=+573132092235&text=${encodedMessage}`;
+
+            window.open(whatsappUrl, "_blank");
+        }
+
+        // --- 9. EVENT LISTENERS ---
+        function setupEventListeners() {
+            const searchInput = document.getElementById("search-input");
+            searchInput.addEventListener("input", (e) => {
+                searchQuery = e.target.value;
+                renderProducts();
+            });
+
+            const rateInputDesktop = document.getElementById("exchange-rate-input");
+            const rateInputMobile = document.getElementById("exchange-rate-input-mobile");
+
+            function handleRateChange(e) {
+                const val = parseFloat(e.target.value);
+                if (!isNaN(val) && val > 0) {
+                    exchangeRate = val;
+                    rateInputDesktop.value = val;
+                    rateInputMobile.value = val;
+                    renderProducts();
+                    updateCartUI();
+                }
+            }
+
+            rateInputDesktop.addEventListener("input", handleRateChange);
+            rateInputMobile.addEventListener("input", handleRateChange);
+        }
+    </script>
+</body>
+</html>
